@@ -1,0 +1,7 @@
+docker run -dit --name foodrunning -p 8080:80 nginx 
+docker exec -it foodrunning /bin/bash
+cd /usr/share/nginx/html
+apt-get update
+apt install vi
+apt-get install vim
+vi index.html
