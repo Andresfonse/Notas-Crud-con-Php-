@@ -1,0 +1,43 @@
+# Musicly - Bloc de Notas con Funcionalidades Avanzadas
+
+## Descripción del Proyecto
+
+Musicly es un bloc de notas avanzado que permite a los usuarios crear, editar, eliminar y adjuntar imágenes a sus notas. Además, cuenta con un sistema de inicio de sesión basado en MariaDB para garantizar la seguridad de las notas de los usuarios.
+
+La interfaz minimalista de Musicly facilita la navegación y el uso intuitivo, proporcionando una experiencia fluida para la gestión de notas y archivos adjuntos.
+
+## Características Principales
+
+- **Gestión de Notas:** Los usuarios pueden crear nuevas notas, editar el contenido de las existentes y eliminarlas según sea necesario.
+- **Adjuntar Imágenes:** Musicly permite a los usuarios cargar imágenes relacionadas con sus notas, proporcionando un enfoque multimedia para la toma de notas.
+- **Inicio de Sesión Seguro:** Utiliza un sistema de inicio de sesión basado en MariaDB para proteger las notas y la información del usuario.
+- **Interfaz Minimalista:** La interfaz de usuario ha sido diseñada de manera minimalista para garantizar la simplicidad y la facilidad de uso.
+
+## Requisitos Previos
+
+- Servidor web (por ejemplo, Apache)
+- PHP 7.0 o superior
+- MariaDB
+
+## Instrucciones de Configuración
+
+1. Clona este repositorio en tu máquina local:
+
+```bash
+git clone https://github.com/tuusuario/musicly.git
+
+
+## Configura tu propia base de datos  
+
+<?php
+define('DB_SERVER', 'tu_servidor');
+define('DB_USERNAME', 'tu_usuario');
+define('DB_PASSWORD', 'tu_contraseña');
+define('DB_NAME', 'nombre_de_la_base_de_datos');
+?>
+
+Contacto
+Para cualquier pregunta o comentario, no dudes en ponerte en contacto:
+
+Telegram: andreseli
+Instagram: Andres.eli
