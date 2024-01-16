@@ -1,8 +1,28 @@
 <?php
 include 'db.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Procesar el formulario de registro
+    $username = $_POST['username'];
+    $age = $_POST['age'];
 
+    // Verificar si el usuario ya existe
+    $result = $conn->query("SELECT * FROM users WHERE username = '$username'");
+    if ($result->num_rows > 0) {
+        $registrationError = "¡El usuario ya existe! Por favor, elige otro apodo.";
+    } else {
+        // Insertar el nuevo usuario en la base de datos
+        $conn->query("INSERT INTO users (username, age) VALUES ('$username', $age)");
 
+        // Iniciar sesión y redirigir al usuario a la página principal
+        session_start();
+        $_SESSION['username'] = $username;
+        header("Location: index.php");
+        exit();
+    }
+}
+
+// Lo de arriba es la parte deñ registro de users  
 
 session_start();
 
@@ -19,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si las credenciales son válidas, inicia sesión y redirige al usuario
     session_start();
-    $_SESSION['username'] = $username; // Usa el nombre de usuario real aquí
+    $_SESSION['username'] = $username;
+	$_SESSION['age'] = $age; // Usa el nombre de usuario real aquí
     header("Location: index.php");
     exit();
 }
@@ -29,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Musicly</title>
 </head>
 <body>
     <style>
@@ -41,15 +62,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 body {
-background:url('https://i.pinimg.com/736x/4a/d6/8f/4ad68f39ae7c09dfa9116654fea1877e.jpg');
+    background: url('https://img.freepik.com/vector-gratis/fondo-pentagrama-musical-brillante-notas-sonido_1017-31220.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1705276800&semt=ais');
+    background-size: cover;
     display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    margin: -20px 0 50px;
 }
+
 
 h1 {
 	font-weight: bold;
@@ -81,8 +104,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #A7C2E1;
+	background-color: #A7C2E1;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -127,7 +150,7 @@ input {
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.24), 
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
@@ -195,9 +218,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #A7C2E1;
+	background: -webkit-linear-gradient(to right, #A7C2E1, #A0AFBF);
+	background: linear-gradient(to right, #A7C2E1, #A0AFBF);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -251,7 +274,7 @@ input {
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD;
+	border: 1px solid #A0AFBF;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
@@ -278,7 +301,7 @@ footer p {
 }
 
 footer i {
-    color: red;
+    color: blue;
 }
 
 footer a {
@@ -297,9 +320,9 @@ footer a {
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your email for log in our software</span>
-            <input type="text" name="username" placeholder="Bot123" required>
+            <input type="text" name="username" placeholder="username" required>
 		
-            <input type="number" name="age" placeholder="Edad" required>
+            <input type="number" name="age" placeholder="Age " required>
             <button type="submit">Login </button>	
         	</form>
 	</div>
@@ -308,19 +331,21 @@ footer a {
 
     
 	<div class="form-container sign-in-container">
-    <form method="post" action="login.php">
-			<h1>Login</h1>
-           
+	<form method="post" action="index.php">
+			<h1>Create Account</h1>
+            <?php if (isset($registrationError)) : ?>
+            <p style="color: red;"><?php echo $registrationError; ?></p>
+        <?php endif; ?>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
-			<span>or use your email for log in our software</span>
+			<span>or use your email for registration</span>
             <input type="text" name="username" placeholder="Bot123" required>
 		
             <input type="number" name="age" placeholder="Edad" required>
-            <button type="submit">Login </button>	
+            <button type="submit">Register </button>	
         	</form>
 	</div>
 	<div class="overlay-container">

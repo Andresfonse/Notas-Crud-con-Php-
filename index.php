@@ -393,7 +393,7 @@ if ($result->num_rows > 0) {
     <input type="url" id="new_task_image_link" name="new_task_image_link" placeholder="https://ejemplo.com/imagen.jpg" required>
             <div class="modal-buttons">
                 <button type="submit" class="save">Guardar Cambios</button>
-                <button type="button" onclick="closeModal()" class="delete">Cancelar</button>
+                <button type="button" onclick="closeModal()" class="delete">Cancel</button>
             </div>
         </form>
     </div>
